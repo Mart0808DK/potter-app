@@ -79,7 +79,5 @@ function showCharacters(nameP, genderP, houseP, dateOfBirthP, ancestryP, eyeColo
   document.querySelector("#characters").insertAdjacentHTML("beforeend",Myhtml);
 
 
-
-
   
 }
