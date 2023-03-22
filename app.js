@@ -7,30 +7,110 @@ const potterSection = document.querySelector("#characters");
 
 function initApp() {
   // Harry Potter
-  const potterName = "Harry Potter";
-  const potterGender = "male";
-  const potterHouse = "Gryffindor";
-  const potterDateOfBirth = "31-07-1980";
-  const potterAncestry = "half-blood";
-  const potterEyeColour = "green";
-  const potterHairColour = "black";
-  const potterActor = "Daniel Radcliffe";
-  const potterImage = "http://hp-api.herokuapp.com/images/harry.jpg";
+  const harry = {
+    name: "Harry Potter",
+    species: "human",
+    gender: "male",
+    house: "Gryffindor",
+    dateOfBirth: "31-07-1980",
+    yearOfBirth: 1980,
+    ancestry: "half-blood",
+    eyeColour: "green",
+    hairColour: "black",
+    wand: "holly,phoenix feather,11",
+    patronus: "stag",
+    hogwartsStudent: true,
+    hogwartsStaff: false,
+    actor: "Daniel Radcliffe",
+    alive: true,
+    image: "http://hp-api.herokuapp.com/images/harry.jpg",
+  };
+
+  // Hermione Granger
+  const hermione = {
+    name: "Hermione Granger",
+    species: "human",
+    gender: "female",
+    house: "Gryffindor",
+    dateOfBirth: "19-09-1979",
+    yearOfBirth: 1979,
+    ancestry: "muggleborn",
+    eyeColour: "brown",
+    hairColour: "brown",
+    wand: "vine,dragon heartstring",
+    patronus: "otter",
+    hogwartsStudent: true,
+    hogwartsStaff: false,
+    actor: "Emma Watson",
+    alive: true,
+    image: "http://hp-api.herokuapp.com/images/hermione.jpeg",
+  };
+
   // Ron Weasley
-  const weasleyName = 'Ron Weasley';
-  const weasleyGender = 'male';
-  const weasleyHouse = 'Gryffindor';
-  const weasleyDateOfBirth = "01-03-1980";
-  const weasleyAncestry = 'pure-blood';
-  const weasleyEyeColour = 'blue';
-  const weasleyHairColour = 'red';
-  const weasleyActor = 'Rupert Grint';
-  const weasleyImage = "http://hp-api.herokuapp.com/images/ron.jpg";
+  const ron = {
+    name: "Ron Weasley",
+    species: "human",
+    gender: "male",
+    house: "Gryffindor",
+    dateOfBirth: "01-03-1980",
+    yearOfBirth: 1980,
+    ancestry: "pure-blood",
+    eyeColour: "blue",
+    hairColour: "red",
+    wand: "willow,unicorn tail-hair,14",
+    patronus: "Jack Russell terrier",
+    hogwartsStudent: true,
+    hogwartsStaff: false,
+    actor: "Rupert Grint",
+    alive: true,
+    image: "http://hp-api.herokuapp.com/images/ron.jpg",
+  };
+
+  const draco = {
+    name: "Draco Malfoy",
+    species: "human",
+    gender: "male",
+    house: "Slytherin",
+    dateOfBirth: "05-06-1980",
+    yearOfBirth: 1980,
+    ancestry: "pure-blood",
+    eyeColour: "grey",
+    hairColour: "blonde",
+    wand: "hawthorn,unicorn tail-hair,10",
+    patronus: "",
+    hogwartsStudent: true,
+    hogwartsStaff: false,
+    actor: "Tom Felton",
+    alive: true,
+    image: "http://hp-api.herokuapp.com/images/draco.jpg",
+  };
+
+  const severus = {
+    name: "Severus Snape",
+    species: "human",
+    gender: "male",
+    house: "Slytherin",
+    dateOfBirth: "09-01-1960",
+    yearOfBirth: 1960,
+    ancestry: "half-blood",
+    eyeColour: "black",
+    hairColour: "black",
+    wand: "",
+    patronus: "doe",
+    hogwartsStudent: false,
+    hogwartsStaff: true,
+    actor: "Alan Rickman",
+    alive: false,
+    image: "http://hp-api.herokuapp.com/images/snape.jpg",
+  };
+
+ showCharacters(harry);
+ showCharacters(ron);
+ showCharacters(hermione);
+ showCharacters(draco);
+ showCharacters(severus);
 
 
-  showCharacters(weasleyName, weasleyGender, weasleyHouse, weasleyDateOfBirth, weasleyAncestry, weasleyEyeColour, weasleyHairColour, weasleyActor, weasleyImage);
-
-  showCharacters(potterName, potterGender, potterHouse, potterDateOfBirth, potterAncestry, potterEyeColour, potterHairColour, potterActor, potterImage);
 }
 
 // function showCharacters(nameP, genderP, houseP, dateOfBirthP, ancestryP, eyeColourP, hairColourP, actorP, imgP) {
@@ -60,24 +140,38 @@ function initApp() {
 //   document.querySelector("#characters").appendChild(articleElement);
 // }
 
-function showCharacters(nameP, genderP, houseP, dateOfBirthP, ancestryP, eyeColourP, hairColourP, actorP, imgP){
+function showCharacters(character){
+  console.log(character);
 
  const Myhtml = /*html*/`
     <article>
-    <img src=${imgP}>
-    <h2>${nameP}</h2>
-    <p>${genderP}</p>
-    <p>${houseP}</p>
-    <p>${dateOfBirthP}</p>
-    <p>${ancestryP}</p>
-    <p>${eyeColourP}</p>
-    <p>${hairColourP}</p>
-    <p>${actorP}</p>
+    <img src=${character.image}>
+    <h2>${character.name}</h2>
+    <p>House of: ${character.house}</p>
     </article>
 
   `
   document.querySelector("#characters").insertAdjacentHTML("beforeend",Myhtml);
+  document.querySelector("#characters article:last-child").addEventListener("click", characterClicked);
+
+  function characterClicked() {
+    console.log("character clicked");
+    showCh(character);
+
+    
+  }
+
+}
+
+function showCh(character) {
+  // change element in dialog
+  document.querySelector("#dialog-firstName").textContent = character.name;
+  document.querySelector("#dialog-house").textContent = character.house;
+  document.querySelector("#dialog-dateOfBirth").textContent = character.dateOfBirth;
 
 
-  
+  document.querySelector("#dialog-img").src = character.image;
+
+  // show dialog
+  document.querySelector("#dialog-characters").showModal();
 }
