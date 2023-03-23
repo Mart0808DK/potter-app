@@ -5,111 +5,19 @@ window.addEventListener("load", initApp);
 
 const potterSection = document.querySelector("#characters");
 
-function initApp() {
+async function initApp() {
   // Harry Potter
-  const harry = {
-    name: "Harry Potter",
-    species: "human",
-    gender: "male",
-    house: "Gryffindor",
-    dateOfBirth: "31-07-1980",
-    yearOfBirth: 1980,
-    ancestry: "half-blood",
-    eyeColour: "green",
-    hairColour: "black",
-    wand: "holly,phoenix feather,11",
-    patronus: "stag",
-    hogwartsStudent: true,
-    hogwartsStaff: false,
-    actor: "Daniel Radcliffe",
-    alive: true,
-    image: "http://hp-api.herokuapp.com/images/harry.jpg",
-  };
-
-  // Hermione Granger
-  const hermione = {
-    name: "Hermione Granger",
-    species: "human",
-    gender: "female",
-    house: "Gryffindor",
-    dateOfBirth: "19-09-1979",
-    yearOfBirth: 1979,
-    ancestry: "muggleborn",
-    eyeColour: "brown",
-    hairColour: "brown",
-    wand: "vine,dragon heartstring",
-    patronus: "otter",
-    hogwartsStudent: true,
-    hogwartsStaff: false,
-    actor: "Emma Watson",
-    alive: true,
-    image: "http://hp-api.herokuapp.com/images/hermione.jpeg",
-  };
-
-  // Ron Weasley
-  const ron = {
-    name: "Ron Weasley",
-    species: "human",
-    gender: "male",
-    house: "Gryffindor",
-    dateOfBirth: "01-03-1980",
-    yearOfBirth: 1980,
-    ancestry: "pure-blood",
-    eyeColour: "blue",
-    hairColour: "red",
-    wand: "willow,unicorn tail-hair,14",
-    patronus: "Jack Russell terrier",
-    hogwartsStudent: true,
-    hogwartsStaff: false,
-    actor: "Rupert Grint",
-    alive: true,
-    image: "http://hp-api.herokuapp.com/images/ron.jpg",
-  };
-
-  const draco = {
-    name: "Draco Malfoy",
-    species: "human",
-    gender: "male",
-    house: "Slytherin",
-    dateOfBirth: "05-06-1980",
-    yearOfBirth: 1980,
-    ancestry: "pure-blood",
-    eyeColour: "grey",
-    hairColour: "blonde",
-    wand: "hawthorn,unicorn tail-hair,10",
-    patronus: "",
-    hogwartsStudent: true,
-    hogwartsStaff: false,
-    actor: "Tom Felton",
-    alive: true,
-    image: "http://hp-api.herokuapp.com/images/draco.jpg",
-  };
-
-  const severus = {
-    name: "Severus Snape",
-    species: "human",
-    gender: "male",
-    house: "Slytherin",
-    dateOfBirth: "09-01-1960",
-    yearOfBirth: 1960,
-    ancestry: "half-blood",
-    eyeColour: "black",
-    hairColour: "black",
-    wand: "",
-    patronus: "doe",
-    hogwartsStudent: false,
-    hogwartsStaff: true,
-    actor: "Alan Rickman",
-    alive: false,
-    image: "http://hp-api.herokuapp.com/images/snape.jpg",
-  };
-
- showCharacters(harry);
- showCharacters(ron);
- showCharacters(hermione);
- showCharacters(draco);
- showCharacters(severus);
-
+  const harry = await getCharacter("https://raw.githubusercontent.com/cederdorff/dat-js/main/data/harry.json"); 
+  showCharacters(harry);
+  const draco = await getCharacter("https://raw.githubusercontent.com/cederdorff/dat-js/main/data/draco.json");
+  showCharacters(draco);
+  const ron = await getCharacter("https://raw.githubusercontent.com/cederdorff/dat-js/main/data/ron.json");
+  showCharacters(ron);
+  const hermione = await getCharacter("https://raw.githubusercontent.com/cederdorff/dat-js/main/data/hermione.json");
+  showCharacters(hermione);
+  const snape = await getCharacter("https://raw.githubusercontent.com/cederdorff/dat-js/main/data/severus.json");
+  showCharacters(snape);
+ 
 
 }
 
@@ -139,6 +47,14 @@ function initApp() {
 
 //   document.querySelector("#characters").appendChild(articleElement);
 // }
+
+async function getCharacter(url) {
+const response = await fetch(url)
+
+const data = await response.json()
+return data;
+
+}
 
 function showCharacters(character){
   console.log(character);
